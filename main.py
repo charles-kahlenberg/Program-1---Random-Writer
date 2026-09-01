@@ -20,23 +20,31 @@ def get_seed(level, book):
     return book[index:index + level]
 
 # returns a random next character given a seed from the book
-def get_next_char():
+def get_next_char(seed, book):
     # initialize the list of characters
-    pass
+    chars = []
+    book_copy = book
     # initialize the current index (where we begin to look in the book)
-
+    index = 0
     # continually find the seed in the book
+    while index != -1:
         # find the index of the seed in the book beginning at the current index
-
+        index = book_copy.find(seed, index)
         # abort if the seed is not found (or it's at the end of the book)
+        if index == -1:
+            break
 
         # otherwise, add the next character to the list
+        chars.append(book_copy[index + len(seed)])
 
-        # and update the index in the book
+        #remove everything up to and including the current seed
+        book_copy = book_copy[index + len(seed):]
 
     # if there is at least one next character in the list of characters, return a randomly chosen one
-
+    if len(chars) > 0:
+        return choice(chars)
     # otherwise, return some appropriate trigger (e.g., None)
+    return None
 
 # VARIABLES
 level = 0
@@ -51,7 +59,7 @@ seed = None
 #  k (or level) -> the level of analysis performed on the book
 #  length -> the length of output to generate
 #  filename -> the filename that contains the text of the book
-level = 2
+level = 10
 length = 150
 filename = "books\\hg-wells_the-time-machine.txt"
 
@@ -64,17 +72,23 @@ output = ""
 
 
 # pick a random seed of length level (or k)
-#seed = get_seed(level, book)
+seed = get_seed(level, book)
 
 # repeat as long as there isn't enough output yet
+while(len(output) != length):
     # get a random next character
-
+    next_char = get_next_char(seed, book)
     # if one exists
+    if next_char is not None:
         # add it to the output
+        output += next_char
 
         # and recalculate the seed
-
+        seed = seed[1:] + next_char
     # otherwise, pick another random seed
+    else:
+        seed = get_seed(level, book)
 
 # display the output
 # OUTPUT
+print(output)
