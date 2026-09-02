@@ -60,7 +60,7 @@ seed = None
 #  length -> the length of output to generate
 #  filename -> the filename that contains the text of the book
 level = 10
-length = 150
+length = 300
 filename = "books\\hg-wells_the-time-machine.txt"
 
 # grab the book
@@ -73,6 +73,7 @@ output = ""
 
 # pick a random seed of length level (or k)
 seed = get_seed(level, book)
+
 
 # repeat as long as there isn't enough output yet
 while(len(output) != length):
