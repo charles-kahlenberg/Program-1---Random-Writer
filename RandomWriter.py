@@ -5,6 +5,9 @@ Last edit: 9/15/2026
 
 Random Writer: Collects information from a provided text and creates a predictive model based on it to create an output.
 Built off of provided template
+
+Sources: Used Claude (Anthropic) to check and debug this program, including fixing the search logic in
+get_next_char, the seed update when level is 0, and the file encoding.
 """
 
 # INPUTS
@@ -52,7 +55,6 @@ filename = 0
 book = None
 output = None
 seed = None
-
 ###### MAIN ######
 
 # grab command line arguments (or manually set the parameters)
@@ -61,7 +63,7 @@ seed = None
 #  filename -> the filename that contains the text of the book
 level = 10
 length = 300
-filename = "books\\hg-wells_the-time-machine.txt"
+filename = "books\\jules-verne_the-mysterious-island.txt"
 
 # grab the book (Project Gutenberg files are UTF-8)
 with open(filename, "r", encoding="utf-8") as f:
@@ -90,6 +92,5 @@ while(len(output) != length):
         seed = get_seed(level, book)
 
 # display the output
-
 # OUTPUT
 print(output)
