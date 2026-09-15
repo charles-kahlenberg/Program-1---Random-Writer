@@ -61,11 +61,7 @@ seed = None
 #  filename -> the filename that contains the text of the book
 level = 10
 length = 300
-<<<<<<< Updated upstream
 filename = "books\\hg-wells_the-time-machine.txt"
-=======
-filename = "books\\jules-verne_the-mysterious-island.txt"
->>>>>>> Stashed changes
 
 # grab the book
 with open(filename, "r") as f:
